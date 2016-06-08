@@ -47,7 +47,9 @@ public class HttpServerEx implements HttpHandler {
         String a = "C:" + exc.getRequestURI().getPath();
         File myFolder = new File(a);
         out.write("<html><body>".getBytes());
-        out.write(("<a href=" + loopAddress + homePage + "\">" + "<b>&#127968</b>" + "</a><br>").getBytes());
+        out.write("WELCOME. You are on a Panda PC!=)<br>".getBytes());
+        out.write("<img src=\"http://kungfupanda3.ru/sites/default/files/kung-fu-panda-3-online.jpg\" alt=\"Mountain View\" style=\"width:304px;height:228px;\">".getBytes());
+        out.write(("<br><a href=" + loopAddress + homePage + "\">" + "HOME: <b>&#127968</b>" + "</a><br>").getBytes());
         if (myFolder.isDirectory()) {
             File[] directory = myFolder.listFiles();
             for (int i = 0; i < directory.length; i++) {
