@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Stack;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -12,8 +11,7 @@ import com.sun.net.httpserver.HttpServer;
 
 public class HttpServerEx implements HttpHandler {
     public static File homePage = new File("C:\\");
-    String loopAddress = "\"http://127.0.0.1:8080//";
-    String localAddress = "\"http://192.168.0.102:8080//";
+    String localAddress = "\"http://192.168.0.102:8080//";//loopAddress = "\"http://127.0.0.1:8080//"
     String downloadMessage = "<b>For download absolute file click me &#x2714; </b><br>";
 
     private static String getFileSizeKiloBytes(File file) {
@@ -49,19 +47,18 @@ public class HttpServerEx implements HttpHandler {
         out.write("<html><body>".getBytes());
         out.write("WELCOME. You are on a Panda PC!=)<br>".getBytes());
         out.write("<img src=\"http://kungfupanda3.ru/sites/default/files/kung-fu-panda-3-online.jpg\" alt=\"Mountain View\" style=\"width:304px;height:228px;\">".getBytes());
-        out.write(("<br><a href=" + loopAddress + homePage + "\">" + "HOME: <b>&#127968</b>" + "</a><br>").getBytes());
+        out.write(("<br><a href=" + localAddress + homePage + "\">" + "HOME: <b>&#127968</b>" + "</a><br>").getBytes());
         if (myFolder.isDirectory()) {
             File[] directory = myFolder.listFiles();
             for (int i = 0; i < directory.length; i++) {
-                out.write(("<a href=" + loopAddress + directory[i] + "\">" + directory[i] + "</a><br>").getBytes());
+                out.write(("<a href=" + localAddress + directory[i] + "\">" + directory[i] + "</a><br>").getBytes());
             }
             out.write("</body></html>".getBytes());
             out.close();
         } else if (myFolder.isFile()) {
             Long lastModified = myFolder.lastModified();
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-            //System.out.println( sdf.format(new Date(lastModified)));
-            out.write(("<a href=" + loopAddress + a + "\"download>" + downloadMessage + "  " + getFileSizeKiloBytes(myFolder) + "<br>" + sdf.format(new Date(lastModified)) + "</a><br><br>").getBytes());
+            out.write(("<a href=" + localAddress + a + "\"download>" + downloadMessage + "  " + getFileSizeKiloBytes(myFolder) + "<br>" + sdf.format(new Date(lastModified)) + "</a><br><br>").getBytes());
             out.write("</body></html>".getBytes());
             InputStream fileInput = new BufferedInputStream(new FileInputStream(myFolder));
             byte[] buf = new byte[4096];
